@@ -7,6 +7,8 @@ import {
 	ScrollRestoration,
 } from 'react-router';
 
+import { AuthProvider } from './lib/auth-context';
+
 export const links = () => [
 	{ rel: 'preconnect', href: 'https://fonts.googleapis.com' },
 	{
@@ -40,7 +42,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-	return <Outlet />;
+	return (
+		<AuthProvider>
+			<Outlet />
+		</AuthProvider>
+	);
 }
 
 export function ErrorBoundary({ error }: { error: Error }) {
@@ -60,11 +66,11 @@ export function ErrorBoundary({ error }: { error: Error }) {
 	}
 
 	return (
-		<main className="pt-16 p-4 container mx-auto">
+		<main className="container mx-auto p-4 pt-16">
 			<h1>{message}</h1>
 			<p>{details}</p>
 			{stack && (
-				<pre className="w-full p-4 overflow-x-auto">
+				<pre className="w-full overflow-x-auto p-4">
 					<code>{stack}</code>
 				</pre>
 			)}

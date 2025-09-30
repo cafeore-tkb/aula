@@ -1,4 +1,4 @@
-import { Welcome } from '../welcome/welcome';
+import { Home } from '../assets/home';
 
 export function meta() {
 	return [
@@ -7,6 +7,6 @@ export function meta() {
 	];
 }
 
-export default function Home() {
-	return <Welcome />;
+export default function Index() {
+	return <Home />;
 }

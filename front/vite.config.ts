@@ -10,6 +10,14 @@ export default defineConfig(({ mode }) => {
 
 	return {
 		plugins: [reactRouter(), tailwindcss(), tsconfigPaths()],
+		optimizeDeps: {
+			exclude: ['firebase/app', 'firebase/auth', 'firebase/firestore'],
+			include: [
+				'firebase > @firebase/app',
+				'firebase > @firebase/auth',
+				'firebase > @firebase/firestore',
+			],
+		},
 		server: {
 			port: Number.parseInt(env.PORT || '5173', 10),
 		},
