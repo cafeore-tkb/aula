@@ -45,4 +45,10 @@
 		"vite-tsconfig-paths": "^5.1.4",
 		"vitest": "^3.2.4"
 	}
+,
+	"browserslist": [
+		"last 2 Chrome versions",
+		"last 2 Firefox versions",
+		"last 2 Safari versions"
+	]
 }
