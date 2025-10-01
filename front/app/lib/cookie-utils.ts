@@ -82,7 +82,7 @@ export function deleteCookie(name: string, path: string = '/') {
 }
 
 /**
- * 認証セッションをCookieに保存する（3時間有効）
+ * 認証セッションをCookieに保存する（30分有効）
  */
 export function saveAuthSession(user: {
 	uid: string;
@@ -98,11 +98,11 @@ export function saveAuthSession(user: {
 		timestamp: Date.now(),
 	};
 
-	// 3時間 = 3 * 60 * 60 秒
-	const threeHours = 3 * 60 * 60;
+	// 30分 = 30 * 60 秒
+	const thirtyMinutes = 30 * 60;
 
 	setCookie('auth_session', JSON.stringify(sessionData), {
-		maxAge: threeHours,
+		maxAge: thirtyMinutes,
 		path: '/',
 		secure: process.env.NODE_ENV === 'production',
 		sameSite: 'lax',
@@ -128,11 +128,11 @@ export function getAuthSession(): {
 	try {
 		const sessionData = JSON.parse(sessionCookie);
 
-		// セッションが3時間以内かチェック
-		const threeHours = 3 * 60 * 60 * 1000; // ミリ秒
+		// セッションが30分以内かチェック
+		const thirtyMinutes = 30 * 60 * 1000; // ミリ秒
 		const now = Date.now();
 
-		if (now - sessionData.timestamp > threeHours) {
+		if (now - sessionData.timestamp > thirtyMinutes) {
 			// セッション期限切れの場合、Cookieを削除
 			deleteCookie('auth_session');
 			return null;

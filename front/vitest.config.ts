@@ -10,6 +10,8 @@ export default defineConfig(async (configEnv: ConfigEnv) => {
 		defineConfig({
 			test: {
 				globals: true,
+				environment: 'jsdom',
+				setupFiles: ['./vitest.setup.ts'],
 			},
 		}),
 	);

@@ -2,12 +2,14 @@ import {
 	isRouteErrorResponse,
 	Links,
 	Meta,
+	Navigate,
 	Outlet,
 	Scripts,
 	ScrollRestoration,
+	useLocation,
 } from 'react-router';
 
-import { AuthProvider } from './lib/auth-context';
+import { AuthProvider, useAuth } from './lib/auth-context';
 
 export const links = () => [
 	{ rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -41,10 +43,43 @@ export function Layout({ children }: { children: React.ReactNode }) {
 	);
 }
 
+function AppGuard() {
+	const { user, loading, sessionExpired } = useAuth();
+	const location = useLocation();
+
+	// ローディング中
+	if (loading) {
+		return (
+			<div className="flex min-h-screen items-center justify-center">
+				<div className="text-center">
+					<div className="mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
+					<p className="text-gray-600">読み込み中...</p>
+				</div>
+			</div>
+		);
+	}
+
+	// セッション期限切れ or 未ログインで /login 以外なら /login へリダイレクト
+	if (!user && location.pathname !== '/login') {
+		return (
+			<Navigate
+				to="/login"
+				replace
+				state={{
+					from: location,
+					reason: sessionExpired ? 'expired' : 'unauthenticated',
+				}}
+			/>
+		);
+	}
+
+	return <Outlet />;
+}
+
 export default function App() {
 	return (
 		<AuthProvider>
-			<Outlet />
+			<AppGuard />
 		</AuthProvider>
 	);
 }

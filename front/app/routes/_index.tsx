@@ -1,4 +1,4 @@
-import { Home } from '../assets/home';
+import { Home } from '../pages/home';
 
 export function meta() {
 	return [
