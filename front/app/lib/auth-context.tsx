@@ -7,7 +7,6 @@ import {
 	saveAuthSession,
 } from '../lib/cookie-utils';
 import {
-	createUserProfile,
 	getUserProfile,
 	onAuthStateChange,
 	type UserProfile,
@@ -98,13 +97,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
 						photoURL: user.photoURL,
 					});
 
-					// Create or update user profile in Firestore
-					await createUserProfile(user);
-					// Get the latest profile data
+					// ユーザープロファイルを取得（存在しない場合は後で処理）
 					const profile = await getUserProfile(user.uid);
 					setUserProfile(profile);
 				} catch (error) {
 					console.error('Error handling user profile:', error);
+					// プロファイルが見つからない場合はnullのままにする
+					setUserProfile(null);
 				}
 			} else {
 				// ユーザーがログアウトまたはセッション期限切れ場合

@@ -58,6 +58,50 @@ export function UserProfile({ user, userProfile }: UserProfileProps) {
 					</h4>
 					<div className="space-y-2 text-gray-600 text-sm">
 						<div className="flex justify-between">
+							<span>Gmail:</span>
+							<span>{userProfile.gmail}</span>
+						</div>
+						<div className="flex justify-between">
+							<span>名前:</span>
+							<span>{userProfile.name}</span>
+						</div>
+						<div className="flex justify-between">
+							<span>年度:</span>
+							<span>{userProfile.year}</span>
+						</div>
+						<div className="flex justify-between">
+							<span>管理者:</span>
+							<span
+								className={
+									userProfile.isAdmin ? 'font-medium text-green-600' : 'text-gray-500'
+								}
+							>
+								{userProfile.isAdmin ? '✓' : '✗'}
+							</span>
+						</div>
+						<div className="flex justify-between">
+							<span>試験官:</span>
+							<span
+								className={
+									userProfile.isExaminer ? 'font-medium text-green-600' : 'text-gray-500'
+								}
+							>
+								{userProfile.isExaminer ? '✓' : '✗'}
+							</span>
+						</div>
+						<div className="flex justify-between">
+							<span>卒業済み:</span>
+							<span
+								className={
+									userProfile.isGraduated
+										? 'font-medium text-green-600'
+										: 'text-gray-500'
+								}
+							>
+								{userProfile.isGraduated ? '✓' : '✗'}
+							</span>
+						</div>
+						<div className="flex justify-between">
 							<span>作成日:</span>
 							<span>{formatDate(userProfile.createdAt)}</span>
 						</div>

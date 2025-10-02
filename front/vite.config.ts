@@ -20,6 +20,11 @@ export default defineConfig(({ mode }) => {
 		},
 		server: {
 			port: Number.parseInt(env.PORT || '5173', 10),
+			headers: {
+				// 開発環境でのCOOPエラー軽減
+				'Cross-Origin-Opener-Policy': 'unsafe-none',
+				'Cross-Origin-Embedder-Policy': 'unsafe-none',
+			},
 		},
 	};
 });

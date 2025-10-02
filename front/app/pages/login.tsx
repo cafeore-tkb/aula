@@ -14,7 +14,7 @@ export default function Login() {
 	const location = useLocation();
 
 	// ログイン後に戻るための遷移元 (location.state の型が不明なため型ガード)
-	let from = '/';
+	let from = '/home';
 	const state = location.state as unknown;
 	if (state && typeof state === 'object') {
 		if ('from' in state) {
