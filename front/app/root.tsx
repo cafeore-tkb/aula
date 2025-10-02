@@ -10,6 +10,7 @@ import {
 } from 'react-router';
 
 import { AuthProvider, useAuth } from './lib/auth-context';
+import './tailwind.css';
 
 export const links = () => [
 	{ rel: 'preconnect', href: 'https://fonts.googleapis.com' },

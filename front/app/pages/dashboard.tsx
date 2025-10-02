@@ -30,7 +30,7 @@ export default function Dashboard() {
 						<div className="space-y-6 md:col-span-2">
 							<div className="rounded-lg bg-white p-6 shadow-md">
 								<h2 className="mb-4 font-semibold text-gray-900 text-xl">
-									ようこそ、{userProfile?.displayName || user?.displayName || 'ユーザー'}
+									ようこそ、{userProfile?.name || user?.displayName || 'ユーザー'}
 									さん！
 								</h2>
 								<p className="text-gray-600">
