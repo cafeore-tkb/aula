@@ -5,12 +5,12 @@ import {
 	getAuthSession,
 	isSessionValid,
 	saveAuthSession,
-} from '../lib/cookie-utils';
+} from './cookie-utils';
 import {
 	getUserProfile,
 	onAuthStateChange,
 	type UserProfile,
-} from '../lib/firebase';
+} from './firebase';
 
 interface AuthContextType {
 	user: User | null;
